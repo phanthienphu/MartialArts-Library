@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartialArtsLibrary.Api", "src\MartialArtsLibrary.Api\MartialArtsLibrary.Api.csproj", "{70481D33-9A32-4A26-9DE5-215791CBCB9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartialArtsLibrary.Core", "src\MartialArtsLibrary.Core\MartialArtsLibrary.Core.csproj", "{2E94DBFC-B06B-4072-BE4A-7D4BDB7F989D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartialArtsLibrary.WebApp", "src\MartialArtsLibrary.WebApp\MartialArtsLibrary.WebApp.csproj", "{C5666BB1-2510-4ED6-B839-8B0E3ABD125E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartialArtsLibrary.Data", "src\MartialArtsLibrary.Data\MartialArtsLibrary.Data.csproj", "{F678FE3F-6C3C-422A-9855-977FA6A3089A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70481D33-9A32-4A26-9DE5-215791CBCB9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70481D33-9A32-4A26-9DE5-215791CBCB9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70481D33-9A32-4A26-9DE5-215791CBCB9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70481D33-9A32-4A26-9DE5-215791CBCB9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E94DBFC-B06B-4072-BE4A-7D4BDB7F989D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E94DBFC-B06B-4072-BE4A-7D4BDB7F989D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E94DBFC-B06B-4072-BE4A-7D4BDB7F989D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E94DBFC-B06B-4072-BE4A-7D4BDB7F989D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5666BB1-2510-4ED6-B839-8B0E3ABD125E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5666BB1-2510-4ED6-B839-8B0E3ABD125E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5666BB1-2510-4ED6-B839-8B0E3ABD125E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5666BB1-2510-4ED6-B839-8B0E3ABD125E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F678FE3F-6C3C-422A-9855-977FA6A3089A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F678FE3F-6C3C-422A-9855-977FA6A3089A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F678FE3F-6C3C-422A-9855-977FA6A3089A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F678FE3F-6C3C-422A-9855-977FA6A3089A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B23377EF-610B-4FB1-A5D9-3CA1D6F75641}
+	EndGlobalSection
+EndGlobal
