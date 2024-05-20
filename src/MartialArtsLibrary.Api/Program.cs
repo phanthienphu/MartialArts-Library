@@ -1,3 +1,4 @@
+using MartialArtsLibrary.Api;
 using MartialArtsLibrary.Core.Domain.Identity;
 using MartialArtsLibrary.Data;
 using Microsoft.AspNetCore.Identity;
@@ -56,5 +57,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+//Seeding data
+app.MigrationDatabase();
 
 app.Run();
