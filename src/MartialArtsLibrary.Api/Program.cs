@@ -1,6 +1,8 @@
 using MartialArtsLibrary.Api;
 using MartialArtsLibrary.Core.Domain.Identity;
+using MartialArtsLibrary.Core.SeedWorks;
 using MartialArtsLibrary.Data;
+using MartialArtsLibrary.Data.SeedWorks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,6 +38,10 @@ builder.Services.Configure<IdentityOptions>(options =>
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
     options.User.RequireUniqueEmail = false;
 });
+
+// Add services to the container.
+builder.Services.AddScoped(typeof(IRepository<,>), typeof(RepositoryBase<,>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 //Default config for ASP.NET Core
 builder.Services.AddControllers();

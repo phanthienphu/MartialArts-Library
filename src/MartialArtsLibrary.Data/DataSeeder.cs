@@ -39,8 +39,8 @@ namespace MartialArtsLibrary.Data
                     UserName="admin",
                     IsActive=true,
                     SecurityStamp=Guid.NewGuid().ToString(),
-                    LockoutEnabled=true,
-                    DateCreated=DateTime.Now,
+                    //DateCreated = DateTime.Now,
+                    LockoutEnabled =true
                 };
                 user.PasswordHash = passWordHasher.HashPassword(user, "Admin@123456");
                 await context.Users.AddAsync(user);
