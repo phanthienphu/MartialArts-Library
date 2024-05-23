@@ -1,5 +1,6 @@
 using MartialArtsLibrary.Api;
 using MartialArtsLibrary.Core.Domain.Identity;
+using MartialArtsLibrary.Core.Model.Content;
 using MartialArtsLibrary.Core.Repositories;
 using MartialArtsLibrary.Core.SeedWorks;
 using MartialArtsLibrary.Data;
@@ -58,6 +59,9 @@ foreach (var service in services)
         builder.Services.Add(new ServiceDescriptor(directInterface, service, ServiceLifetime.Scoped));
     }
 }
+
+builder.Services.AddAutoMapper(typeof(PostInListDto));
+builder.Services.AddAutoMapper(typeof(PostDto));
 
 //Default config for ASP.NET Core
 builder.Services.AddControllers();
