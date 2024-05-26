@@ -1,4 +1,7 @@
-﻿using MartialArtsLibrary.Core.SeedWorks;
+﻿using AutoMapper;
+using MartialArtsLibrary.Core.Repositories;
+using MartialArtsLibrary.Core.SeedWorks;
+using MartialArtsLibrary.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +14,13 @@ namespace MartialArtsLibrary.Data.SeedWorks
     {
         private readonly MartialArtsLibraryContext _context;
 
-        public UnitOfWork(MartialArtsLibraryContext context)
+        public UnitOfWork(MartialArtsLibraryContext context, IMapper mapper)
         {
             _context = context;
+            Posts = new PostRepository(context, mapper);
         }
+
+        public IPostRepository Posts { get; private set; }
         public async Task<int> CompleteAsync()
         {
             return await _context.SaveChangesAsync();

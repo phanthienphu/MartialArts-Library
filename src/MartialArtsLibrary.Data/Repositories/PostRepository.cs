@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace MartialArtsLibrary.Data.Repositories
 {
-    public class PostRepository : RepositoryBase<PostInListDto, Guid>, IPostRepository
+    public class PostRepository : RepositoryBase<Post, Guid>, IPostRepository
     {
         private readonly IMapper _mapper;
         public PostRepository(MartialArtsLibraryContext context,IMapper mapper) : base(context)
@@ -27,7 +27,7 @@ namespace MartialArtsLibrary.Data.Repositories
             return _context.Posts.OrderByDescending(x => x.ViewCount).Take(count).ToListAsync();
         }
 
-        public async Task<PagedResult<PostInListDto>> GetPostsPagingAsync(string keyword
+        public async Task<PagedResult<PostInListDto>> GetPostsPagingAsync(string? keyword
             , Guid? categoryId, int pageIndex = 1, int pageSize = 10)
         {
             var query=_context.Posts.AsQueryable();
@@ -43,7 +43,7 @@ namespace MartialArtsLibrary.Data.Repositories
             query = query.OrderByDescending(x => x.DateCreated).Skip((pageIndex - 1) * pageSize).Take(pageSize);
             return new PagedResult<PostInListDto>
             {
-                Results = await _mapper.ProjectTo<PostInListDto>query.ToArrayAsync(),
+                Results = await _mapper.ProjectTo<PostInListDto>(query).ToListAsync(),
                 CurrentPage = pageIndex,
                 RowCount=totalRow,
                 PageSize =pageSize
