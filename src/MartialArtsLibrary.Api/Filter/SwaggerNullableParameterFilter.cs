@@ -2,7 +2,7 @@
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace MartialArtsLibrary.Api
+namespace MartialArtsLibrary.Api.Filter
 {
     public class SwaggerNullableParameterFilter : IParameterFilter
     {

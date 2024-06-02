@@ -1,4 +1,7 @@
 using MartialArtsLibrary.Api;
+using MartialArtsLibrary.Api.Filter;
+using MartialArtsLibrary.Api.Services;
+using MartialArtsLibrary.Core.ConfigOption;
 using MartialArtsLibrary.Core.Domain.Identity;
 using MartialArtsLibrary.Core.Model.Content;
 using MartialArtsLibrary.Core.Repositories;
@@ -63,7 +66,14 @@ foreach (var service in services)
 }
 
 builder.Services.AddAutoMapper(typeof(PostInListDto));
-builder.Services.AddAutoMapper(typeof(PostDto));
+//builder.Services.AddAutoMapper(typeof(PostDto));
+
+//Authen and author
+builder.Services.Configure<JwtTokenSettings>(configuration.GetSection("JwtTokenSettings"));
+builder.Services.AddScoped<SignInManager<AppUser>, SignInManager<AppUser>>();
+builder.Services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
 
 //Default config for ASP.NET Core
 builder.Services.AddControllers();
