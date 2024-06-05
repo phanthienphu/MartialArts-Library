@@ -4,7 +4,6 @@ using MartialArtsLibrary.Core.Domain.Identity;
 using MartialArtsLibrary.Core.Model.Auth;
 using MartialArtsLibrary.Core.Model.System;
 using MartialArtsLibrary.Core.SeedWorks.Constants;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
@@ -25,7 +24,8 @@ namespace MartialArtsLibrary.Api.Controllers.AdminApi
         public AuthController(UserManager<AppUser> userManager
             ,SignInManager<AppUser> signInManager
             ,ITokenService tokenService
-            , RoleManager<AppRole> roleManager) {
+            , RoleManager<AppRole> roleManager) 
+        {
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
@@ -40,22 +40,22 @@ namespace MartialArtsLibrary.Api.Controllers.AdminApi
             {
                 return BadRequest("Invalid request");
             }
+
             var user = await _userManager.FindByNameAsync(request.UserName);
             if(user == null || user.IsActive == false || user.LockoutEnabled)
             {
-                //return Unauthorized("Đăng nhập không đúng");
-                return BadRequest("Đăng nhập không đúng");
-            }
-            var result =await _signInManager.PasswordSignInAsync(request.UserName,request.Password,false,true);
-            if (!result.Succeeded)
-            {
-                //return Unauthorized("Đăng nhập không đúng");
                 return BadRequest("Đăng nhập không đúng");
             }
 
-            //Authotication
+            var result = await _signInManager.PasswordSignInAsync(request.UserName, request.Password, false, true);
+            if (!result.Succeeded)
+            {
+                return BadRequest("Đăng nhập không đúng");
+            }
+
+            //Authorization
             var roles = await _userManager.GetRolesAsync(user);
-            var permissions = await this.GetPermissionsByUserIdAsync(user.Id.ToString());
+            var permissions =  await this.GetPermissionsByUserIdAsync(user.Id.ToString());
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Email,user.Email),
@@ -71,12 +71,13 @@ namespace MartialArtsLibrary.Api.Controllers.AdminApi
             var refreshToken = _tokenService.GenerateRefreshToken();
 
             user.RefreshToken = refreshToken;
-            user.RefreshTokenExpiryTime=DateTime.Now.AddDays(30);
+            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(30);
             await _userManager.UpdateAsync(user);
 
-            return Ok(new AuthenticatedResult() { 
+            return Ok(new AuthenticatedResult() 
+            { 
                 Token = accessToken,
-                RefreshToken= refreshToken
+                RefreshToken = refreshToken
             });
         }
 

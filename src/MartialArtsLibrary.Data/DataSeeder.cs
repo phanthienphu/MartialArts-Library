@@ -1,10 +1,5 @@
 ﻿using MartialArtsLibrary.Core.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MartialArtsLibrary.Data
 {
@@ -39,12 +34,11 @@ namespace MartialArtsLibrary.Data
                     UserName="admin",
                     IsActive=true,
                     SecurityStamp=Guid.NewGuid().ToString(),
-                    //DateCreated = DateTime.Now,
+                    DateCreated = DateTime.Now,
                     LockoutEnabled = false
                 };
                 user.PasswordHash = passWordHasher.HashPassword(user, "Admin@123456");
                 await context.Users.AddAsync(user);
-                await context.SaveChangesAsync();
 
                 await context.UserRoles.AddAsync(new IdentityUserRole<Guid>()
                 {

@@ -17,11 +17,10 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var connectionString = configuration.GetConnectionString("DefaultConnection");
-
-
 //Config DB Context and ASP.NET Core Identity
 builder.Services.AddDbContext<MartialArtsLibraryContext>(options =>
                 options.UseSqlServer(connectionString));
+
 builder.Services.AddIdentity<AppUser, AppRole>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<MartialArtsLibraryContext>();
 
@@ -49,8 +48,8 @@ builder.Services.Configure<IdentityOptions>(options =>
 // Add services to the container.
 builder.Services.AddScoped(typeof(IRepository<,>), typeof(RepositoryBase<,>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-//Business services and repositories
-//builder.Services.AddScoped<IPostRepository, PostRepository>();
+
+// Business services and repositories
 var services = typeof(PostRepository).Assembly.GetTypes()
     .Where(x => x.GetInterfaces().Any(i => i.Name == typeof(IRepository<,>).Name)
     && !x.IsAbstract && x.IsClass && !x.IsGenericType);
@@ -65,8 +64,8 @@ foreach (var service in services)
     }
 }
 
+//Auto mapper
 builder.Services.AddAutoMapper(typeof(PostInListDto));
-//builder.Services.AddAutoMapper(typeof(PostDto));
 
 //Authen and author
 builder.Services.Configure<JwtTokenSettings>(configuration.GetSection("JwtTokenSettings"));

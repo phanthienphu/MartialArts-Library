@@ -14,7 +14,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "nswag-admin":"node node_modules/nswag/bin/nswag.js run nswag-admin.json"
   },
   "private": true,
   "dependencies": {

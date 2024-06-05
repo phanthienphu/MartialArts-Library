@@ -39,32 +39,32 @@ namespace MartialArtsLibrary.Data
                .HasKey(x => new { x.UserId });
         }
 
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
-        {
-            //Kiểm tra các mục được cập nhật là thêm mới hay sửa 
-            var entries = ChangeTracker
-                .Entries()
-                .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
+        //public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        //{
+        //    //Kiểm tra các mục được cập nhật là thêm mới hay sửa
+        //    var entries = ChangeTracker
+        //        .Entries()
+        //        .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
 
-            foreach (var entityEntry in entries)
-            {
-                //Tự động gán ngày hiện tại vào trường DateCreated nếu là thêm mới
-                var dateCreatedProp = entityEntry.Entity.GetType().GetProperty("DateCreated");
-                if (entityEntry.State == EntityState.Added
-                    && dateCreatedProp != null)
-                {
-                    dateCreatedProp.SetValue(entityEntry.Entity, DateTime.Now);
-                }
+        //    foreach (var entityEntry in entries)
+        //    {
+        //        //Tự động gán ngày hiện tại vào trường DateCreated nếu là thêm mới
+        //        var dateCreatedProp = entityEntry.Entity.GetType().GetProperty("DateCreated");
+        //        if (entityEntry.State == EntityState.Added
+        //            && dateCreatedProp != null)
+        //        {
+        //            dateCreatedProp.SetValue(entityEntry.Entity, DateTime.Now);
+        //        }
 
-                //Tự động gán ngày hiện tại vào trường ModifiedDate nếu là sửa
-                var modifiedDateProp = entityEntry.Entity.GetType().GetProperty("ModifiedDate");
-                if (entityEntry.State == EntityState.Modified
-                    && modifiedDateProp != null)
-                {
-                    modifiedDateProp.SetValue(entityEntry.Entity, DateTime.Now);
-                }
-            }
-            return base.SaveChangesAsync(cancellationToken);
-        }
+        //        //Tự động gán ngày hiện tại vào trường ModifiedDate nếu là sửa
+        //        var modifiedDateProp = entityEntry.Entity.GetType().GetProperty("ModifiedDate");
+        //        if (entityEntry.State == EntityState.Modified
+        //            && modifiedDateProp != null)
+        //        {
+        //            modifiedDateProp.SetValue(entityEntry.Entity, DateTime.Now);
+        //        }
+        //    }
+        //    return base.SaveChangesAsync(cancellationToken);
+        //}
     }
 }
