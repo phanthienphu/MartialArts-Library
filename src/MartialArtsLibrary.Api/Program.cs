@@ -17,6 +17,15 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var connectionString = configuration.GetConnectionString("DefaultConnection");
+var MartiakArtsCorsPolicy = "MartiakArtsCorsPolicy";
+builder.Services.AddCors(o => o.AddPolicy(MartiakArtsCorsPolicy, builder =>
+{
+    builder.AllowAnyMethod()
+        .AllowAnyHeader()
+        .WithOrigins(configuration["AllowedOrigins"])
+        .AllowCredentials();
+}));
+
 //Config DB Context and ASP.NET Core Identity
 builder.Services.AddDbContext<MartialArtsLibraryContext>(options =>
                 options.UseSqlServer(connectionString));
@@ -106,7 +115,7 @@ if (app.Environment.IsDevelopment())
         c.DisplayRequestDuration();
     });
 }
-
+app.UseCors(MartiakArtsCorsPolicy);
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
